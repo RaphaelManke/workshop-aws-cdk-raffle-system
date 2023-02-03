@@ -1,8 +1,6 @@
 # Chapter - 0 - Setup
 
-## Steps
-
-### Requirements
+## Requirements
 
 1. Install the AWS CLI
    - [AWS CLI installation](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
@@ -12,7 +10,7 @@
 1. IDE with Typescript support
    - VSCode is recommended
 
-### Repository
+## Repository
 
 1. Clone this repository
 1. Open the folder in your IDE
@@ -24,7 +22,7 @@
    - `test` folder contains the unit tests for the stack
      - **Note**: the unit tests are not part of the workshop, but are included for completeness
 
-### AWS setup
+## AWS setup
 
 1. Login into the AWS console with the provided username and password
    ![login](images/aws-login-iam.png)
@@ -38,29 +36,34 @@
    ```bash
     aws configure --profile workshop --region eu-central-1
    ```
-1. export the AWS profile name (this has to be done in every terminal session)
+1. export the AWS profile name and region (this has to be done in every terminal session)
+
    ```bash
    export AWS_PROFILE=workshop
+   export AWS_REGION=eu-central-1
+
    ```
+
 1. Test the AWS CLI setup
    ```bash
-   aws sts get-caller-identity --profile workshop
+   aws sts get-caller-identity
    ```
    This command should return the username of the IAM user you are logged in with
 
-### CDK setup
+## CDK setup
 
+0. Make sure you have the ENV variable `AWS_PROFILE` set to the profile name you used in the previous step
 1. Bootstrap the CDK environment
    ```bash
-   npm run cdk bootstrap -- --profile workshop
+   npm run cdk bootstrap
    ```
    - This command will setup the CDK environment in your AWS account e.g. create the S3 bucket for the deployment artifacts
 1. Deploy the stack
    ```bash
-   npm run cdk deploy -- --profile workshop
+   npm run cdk deploy
    ```
 
-### (optional) IDE setup
+## (optional) IDE setup
 
 There are several IDE extensions available to make the development easier e.g. invoke a lambda function. One of the following extensions are recommended:
 
