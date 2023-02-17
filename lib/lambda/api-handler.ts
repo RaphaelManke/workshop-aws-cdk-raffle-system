@@ -1,6 +1,11 @@
+import { APIGatewayProxyResult } from "aws-lambda";
+
 // the exported handler function that is invoked on every request
-export const handler = async () => {
+export const handler = async (): Promise<APIGatewayProxyResult> => {
   return {
-    message: "Hello World",
+    statusCode: 200,
+    body: JSON.stringify({
+      message: "Hello World",
+    }),
   };
 };
