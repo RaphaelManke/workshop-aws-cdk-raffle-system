@@ -5,6 +5,7 @@ import { Runtime, StartingPosition } from "aws-cdk-lib/aws-lambda";
 import { DynamoEventSource } from "aws-cdk-lib/aws-lambda-event-sources";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
+import { KafkaCluster } from "./constructs/kafka-serverless-cluster";
 
 export class WorkshopAwsCdkRaffleSystemStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -17,10 +18,16 @@ export class WorkshopAwsCdkRaffleSystemStack extends cdk.Stack {
       stream: StreamViewType.NEW_AND_OLD_IMAGES,
     });
 
-    const streamHandler = new NodejsFunction(this, "DynamoStreamHandler", {
-      runtime: Runtime.NODEJS_18_X,
-      entry: "lib/lambda/dynamo-stream-handler.ts",
-    });
+    const kafkaCluster = new KafkaCluster(this, "KafkaCluster", {});
+
+    const streamHandler = kafkaCluster.addProducerLambda(
+      "DynamoStreamHandler",
+      {
+        runtime: Runtime.NODEJS_18_X,
+        entry: "lib/lambda/dynamo-stream-handler.ts",
+        timeout: cdk.Duration.seconds(30),
+      }
+    );
 
     table.grantStreamRead(streamHandler);
     streamHandler.addEventSource(
