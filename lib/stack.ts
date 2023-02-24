@@ -52,5 +52,12 @@ export class WorkshopAwsCdkRaffleSystemStack extends cdk.Stack {
     api.root.addResource("raffle").addMethod("GET");
 
     table.grantWriteData(lambda);
+
+    const consumerLambda = new NodejsFunction(this, "KafkaConsumerLambda", {
+      entry: "lib/lambda/kafka-consumer-handler.ts",
+      runtime: Runtime.NODEJS_18_X,
+    });
+
+    kafkaCluster.addConsumer(consumerLambda);
   }
 }
