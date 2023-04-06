@@ -8,6 +8,16 @@ On top of that all the customer data also need to be stored in a database in the
 Luckily for you, our chief lead architect Sven Serverless is still around and already draw some boxes and lines on the office walls which he thinks is the best and only architecture to build such a system.
 Since he is best friend with the CEO, you absolutely have to build the system like he designed it, or you are fired immediately.
 
+## Quests
+
+- [Quest 0 - Setup](./docs/00-Setup.md)
+- [Quest 1 - Lambda function](./docs/01-Lambda.md)
+- [Quest 2 - ApiGateway](./docs/02-Apigateway.md)
+- [Quest 3 - DynamoDB](./docs/03-DynamoDB.md)
+- [Quest 4 - DynamoDB stream](./docs/04-DynamoDB_streams.md)
+- [Quest 5 - Kafka producer](./docs/05-Kafka_producer.md)
+- [Quest 6 - Kafka consumer](./docs/06-Kafka_consumer.md)
+- [Quest 6 - DynamoDB update](./docs/07-DynamoDB_update.md)
 ## Architecture
 
 ![Architecture](./architecture.drawio.svg)
